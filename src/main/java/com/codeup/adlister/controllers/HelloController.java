@@ -1,17 +1,15 @@
 package com.codeup.adlister.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello") //request
+    @GetMapping("/hello/{name}") //request
     @ResponseBody // response
-    public String showAHelloMessage() {
-        return "Hello from Spring!"; // what I respond with
+    public String showAHelloMessage(@PathVariable String name) {
+        return "Hello from " + name; // what I respond with
     }
 
     @GetMapping("/create-a-hello")
@@ -25,6 +23,18 @@ public class HelloController {
     public String submitCreateForm(){
         //... saving an ad
         return "ad has been saved!";
+    }
+
+    @GetMapping("/get-zip/{zipcode}")
+    @ResponseBody
+    public int getZipCode(@PathVariable int zipcode){
+        return zipcode;
+    }
+
+    @RequestMapping(path = "/increment/{number}", method = RequestMethod.GET)
+    @ResponseBody
+    public String addOne(@PathVariable int number) {
+        return number + " plus one is " + (number + 1) + "!";
     }
 
 }
