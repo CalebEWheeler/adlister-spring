@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>You rolled: <span th:text="${n}"></span> <br>The number you needed to roll is: <span th:text="${random}"></span></p>
+    <div th:if="${random == n}">
+        <p>Good Job! Want to play again?</p>
+        <form action="/roll-dice" method="Get">
+            <button>Play again!</button>
+        </form>
+    </div>
+    <div th:if="${random != n}">
+        <p>Bummer, want to try again?</p>
+        <form action="/roll-dice" method="Get">
+            <button>Play again!</button>
+        </form>
+    </div>
+</body>
+</html>
