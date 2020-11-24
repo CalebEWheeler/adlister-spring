@@ -13,7 +13,7 @@ public class PostController {
         return "posts index page";
     }
     @GetMapping("/posts/{id}") @ResponseBody
-    public String IndividualPost(@PathVariable int id) {
+    public String IndividualPost(@PathVariable long id) {
         return "view user with id of: " +id+ "'s post";
     }
     @GetMapping("/posts/create") @ResponseBody
