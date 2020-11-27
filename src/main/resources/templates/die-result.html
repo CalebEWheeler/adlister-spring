@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>You rolled: <span th:text="${n}"></span> <br>The number you needed to roll is: <span th:text="${random}"></span></p>
+<p>You chose: <span th:text="${n}"></span> <br>The number you needed to roll is: <span th:text="${random}"></span></p>
     <div th:if="${random == n}">
         <p>Good Job! Want to play again?</p>
         <form action="/roll-dice" method="Get">
