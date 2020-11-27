@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <div th:replace="partials/partials.html :: BootstrapCSS"></div>
 </head>
 <body>
+<div th:replace="partials/partials.html :: navbar"></div>
+<div th:replace="partials/partials.html :: header"></div>
 <p>You chose: <span th:text="${n}"></span> <br>The number you needed to roll is: <span th:text="${random}"></span></p>
     <div th:if="${random == n}">
         <p>Good Job! Want to play again?</p>
@@ -18,5 +21,7 @@
             <button>Play again!</button>
         </form>
     </div>
+<div th:replace="partials/partials.html :: footer"></div>
+<div th:replace="partials/partials.html :: BootstrapScript"></div>
 </body>
 </html>
