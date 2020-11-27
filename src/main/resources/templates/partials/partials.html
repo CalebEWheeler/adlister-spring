@@ -7,11 +7,21 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<navbar th:fragment="footer">
-    <input type="text">
-    <button>Search</button>
-</navbar>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand">Navbar</a>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
 
+<header th:fragment="header" class="card-header">I am a header!</header>
+
+<footer th:fragment="footer" class="footer">
+    <div class="container">
+        <span class="text-muted">Sticky Footer</span>
+    </div>
+</footer>
 <div th:fragment="BootstrapScript">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
