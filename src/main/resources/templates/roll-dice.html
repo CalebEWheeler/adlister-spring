@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <div th:replace="partials/partials.html :: BootstrapCSS"></div>
 </head>
 <body>
+<div th:replace="partials/partials.html :: navbar"></div>
+<div th:include="partials/partials.html :: header"></div>
 <h1>Guess a number: </h1>
 <ul>
     <li><a href="/roll-dice/1">1</a></li>
@@ -14,5 +17,8 @@
     <li><a href="/roll-dice/5">5</a></li>
     <li><a href="/roll-dice/6">6</a></li>
 </ul>
+
+<div th:replace="partials/partials.html :: footer"></div>
+<div th:replace="partials/partials.html :: BootstrapScript"></div>
 </body>
 </html>
