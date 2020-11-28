@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<div >
-    <a href="/posts/show.html"><h5 th:text="${post.title}"></h5></a>
-    <p th:text="${post.body}"></p>
+<div th:object="${post}">
+    <h5 th:text="${post.getTitle()}"></h5>
+    <p th:text="${post.getBody()}"></p>
 </div>
 </body>
 </html>
