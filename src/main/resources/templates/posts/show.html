@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<div th:object="${post}">
+<div th:value="post">
     <h5 th:text="${post.getTitle()}"></h5>
-    <p th:text="${post.getBody()}"></p>
+    <p th:text="body"></p>
 </div>
 </body>
 </html>
