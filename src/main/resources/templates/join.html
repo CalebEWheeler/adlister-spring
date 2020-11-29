@@ -9,7 +9,9 @@
 
 <h1 th:text="${cohort}"></h1>
 <ul>
-    <li th:each="name : ${cohortNames}"><span th:text="${name}"></span></li>
+    <li th:each="name : ${cohortNames}">
+        <span th:text="${name}"></span>
+    </li>
 </ul>
 
 <div th:if="${cohort == null}">

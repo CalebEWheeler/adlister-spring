@@ -35,11 +35,10 @@ public class PostController {
         return "/posts/index";
     }
 
-    @GetMapping("/show")
-    public String GetPost(@RequestParam(value="ad") Post post, Model model) {
-        model.addAttribute("post", post);
-//        model.addAttribute("title",title);
-//        model.addAttribute("body", body);
+    @PostMapping("/show")
+    public String PostPost(@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postBody") String postBody, Model model) {
+        model.addAttribute("postTitle", postTitle);
+        model.addAttribute("postBody", postBody);
         return "/posts/show";
     }
 //    @GetMapping("/posts/show")
@@ -61,10 +60,6 @@ public class PostController {
         Post post1 = new Post("Fleece Sweater", "Like new Eddie Bauer fleece sweater, worn once.");
         Post post2 = new Post("Sharpie Marker's 24ct", "Unopened box of large tip sharpie markers");
         Post post3 = new Post("Personal Vaporizer", "VooPoo Drag 2 Platinum for sale. Comes with 3 extra FireLuke Max 10ohm coils");
-
-//        Post post1 = new Post(1,"Fleece Sweater", "Like new Eddie Bauer fleece sweater, worn once.");
-//        Post post2 = new Post(2,"Sharpie Marker's 24ct", "Unopened box of large tip sharpie markers");
-//        Post post3 = new Post(3,"Personal Vaporizer", "VooPoo Drag 2 Platinum for sale. Comes with 3 extra FireLuke Max 10ohm coils");
 
         postList.add(post1);
         postList.add(post2);
