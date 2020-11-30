@@ -1,4 +1,4 @@
-package com.codeup.adlister.controllers;
+package com.codeup.adlister.JPA;
 
 import javax.persistence.*;
 

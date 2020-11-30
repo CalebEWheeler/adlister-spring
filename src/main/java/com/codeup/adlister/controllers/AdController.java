@@ -1,6 +1,6 @@
 package com.codeup.adlister.controllers;
 
-import com.codeup.adlister.controllers.Repository.AdRepository;
+import com.codeup.adlister.Repository.AdRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

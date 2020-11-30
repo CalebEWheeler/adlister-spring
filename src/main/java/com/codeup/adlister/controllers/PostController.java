@@ -1,5 +1,7 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.JPA.Post;
+import com.codeup.adlister.Repository.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,11 @@ import java.util.List;
 
 @Controller
 public class PostController {
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
 //    @GetMapping("/posts") @ResponseBody
 //    public String Index() {
 //        return "posts index page";
