@@ -41,19 +41,19 @@ public class PostController {
         model.addAttribute("postBody", postBody);
         return "/posts/show";
     }
-//    @GetMapping("/posts/show")
-//    public String GetPost(Model model) {
-//        Post post = new Post("1984 Schwinn Bike", "Stored in a storage unit since 1990 and kept covered to help prevent environmental exposure. In very good condition");
-//        model.addAttribute("post", post);
-//
-////        Post post = new Post("${post.title}", "${post.body}");
-////        model.addAttribute("title", "${post.title}");
-////        model.addAttribute("body", "${post.body}");
-//
-//
-//        //has to stay this way so there is a path to show.html...
-//        return "posts/show";
-//    }
+    @GetMapping("/posts/show")
+    public String GetPost(Model model) {
+        Post post = new Post("1984 Schwinn Bike", "Stored in a storage unit since 1990 and kept covered to help prevent environmental exposure. In very good condition");
+        model.addAttribute("post", post);
+
+//        Post post = new Post("${post.title}", "${post.body}");
+//        model.addAttribute("title", "${post.title}");
+//        model.addAttribute("body", "${post.body}");
+
+
+        //has to stay this way so there is a path to show.html...
+        return "posts/show";
+    }
 
     public List<Post> posts() {
         List<Post> postList = new ArrayList<>();

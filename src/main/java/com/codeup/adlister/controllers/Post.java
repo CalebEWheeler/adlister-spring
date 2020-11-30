@@ -14,10 +14,14 @@ public class Post {
     @Column(nullable=false)
     private String body;
 
+    //why make a no arg constructor for Post?
+    public Post() {}
+
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
     }
+
 
     public String getTitle() {return title;}
     public void setTitle(String title) {this.title = title;}
