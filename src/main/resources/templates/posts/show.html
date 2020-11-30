@@ -6,9 +6,9 @@
     <div th:replace="partials/partials.html :: BootstrapCSS"></div>
 </head>
 <body>
-<div class="card col-auto mb-5 mx-5" style="width: 30rem;" >
-    <h5 class="card-header" th:text="${postTitle}"></h5>
-    <p class="card-body" th:text="${postBody}"></p>
+<div class="card col-auto mb-5 mx-5" th:value="${post}" style="width: 30rem;" >
+    <h5 class="card-header" th:text="${post.getTitle()}"></h5>
+    <p class="card-body" th:text="${post.getBody()}"></p>
 </div>
 <div th:replace="partials/partials.html :: BootstrapScript"></div>
 </body>

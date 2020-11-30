@@ -1,4 +1,4 @@
-package com.codeup.adlister.JPA;
+package com.codeup.adlister.models;
 import javax.persistence.*;
 
 @Entity

@@ -10,15 +10,15 @@
 <div th:replace="partials/partials.html :: header"></div>
 <h1>Guess a number: </h1>
 <ul>
-    <li><a href="/roll-dice/1">1</a></li>
-    <li><a href="/roll-dice/2">2</a></li>
-    <li><a href="/roll-dice/3">3</a></li>
-    <li><a href="/roll-dice/4">4</a></li>
-    <li><a href="/roll-dice/5">5</a></li>
-    <li><a href="/roll-dice/6">6</a></li>
+    <li><a th:href="@{/roll-dice/1}">1</a></li>
+    <li><a th:href="@{/roll-dice/2}">2</a></li>
+    <li><a th:href="@{/roll-dice/3}">3</a></li>
+    <li><a th:href="@{/roll-dice/4}">4</a></li>
+    <li><a th:href="@{/roll-dice/5}">5</a></li>
+    <li><a th:href="@{/roll-dice/6}">6</a></li>
 </ul>
 
-<div th:replace="partials/partials.html :: footer"></div>
-<div th:replace="partials/partials.html :: BootstrapScript"></div>
+<th:block th:include="partials/partials.html :: footer"></th:block>
+<th:block th:include="partials/partials.html :: BootstrapScript"></th:block>
 </body>
 </html>
