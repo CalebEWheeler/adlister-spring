@@ -10,7 +10,9 @@
     <div class="card-header d-flex">
         <h5 class="mr-auto" th:text="${post.getTitle()}"></h5>
         <button id="myModal" data-toggle="modal" data-target="#editModal" class="btn btn-warning mr-2">Edit</button>
-        <button class="btn btn-danger mr-2">Delete</button>
+        <form th:action="@{/delete/{id}(id=${post.getId()})}" method="post">
+            <button class="btn btn-danger mr-2" type="submit">Delete</button>
+        </form>
     </div>
     <p class="card-body" th:text="${post.getBody()}"></p>
 </div>
