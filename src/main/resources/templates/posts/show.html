@@ -6,34 +6,49 @@
     <div th:replace="partials/partials.html :: BootstrapCSS"></div>
 </head>
 <body>
-<div class="card col-auto mb-5 mx-5" th:value="${post}" style="width: 30rem;" >
+<div class="card col-auto mb-5 mx-5" th:value="${post}" style="width: 30rem;">
     <div class="card-header d-flex">
         <h5 class="mr-auto" th:text="${post.getTitle()}"></h5>
-        <button class="btn btn-warning mr-2">Edit</button>
+        <button id="myModal" data-toggle="modal" data-target="#editModal" class="btn btn-warning mr-2">Edit</button>
         <button class="btn btn-danger mr-2">Delete</button>
     </div>
     <p class="card-body" th:text="${post.getBody()}"></p>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
+            <form class="d-flex flex-column" th:action="@{/show/{id}(id=${post.getId()})}" method="post">
+            <div class="modal-body" style="width: 30rem;">
+                    <div class="d-flex flex-column">
+                        <label for="editTitle">Title: </label>
+                        <input id="editTitle" name="editTitle" th:value="${post.getTitle()}" type="text">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label for="editBody">Body: </label>
+                        <input class="align-self-center" id="editBody" name="editBody" th:value="${post.getBody()}" type="text" style="width:28rem; height:10rem;">
+                    </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Edit Post</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
 <div th:replace="partials/partials.html :: BootstrapScript"></div>
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
 </body>
 </html>
