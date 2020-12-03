@@ -13,7 +13,10 @@
                 <h5 class="align-self-center mr-auto" th:text="${post.getTitle()}"></h5>
                 <a th:href="@{show/{id}(id=${post.getId()})}"><div class="btn btn-success mr-2" type="submit">View Post</div></a>
             </div>
-            <p class="card-body" th:text="${post.getBody()}"></p>
+            <div class="card-body">
+            <p th:text="${post.getBody()}"></p>
+            <p>Created by: <span th:text="${post.getUser().getEmail()}"></span></p>
+    </div>
     </div>
 </div>
 

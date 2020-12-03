@@ -1,7 +1,9 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.Repository.PostRepository;
+import com.codeup.adlister.Repository.UserRepository;
 import com.codeup.adlister.models.Post;
+import com.codeup.adlister.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,18 +11,26 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
-    //    @GetMapping("/posts/create") @ResponseBody
-//    public String GetPostPage() {
-//        return "view the form for creating a post <form method='post'><button>create</button></form>";
-//    }
-//    @PostMapping("/posts/create") @ResponseBody
-//    public String PostPostPage() {
-//        return "create a new post";
-//    }
+        @GetMapping("/posts/create") @ResponseBody
+    public String ShowCreateForm() {
+        return "posts/new";
+    }
+    @PostMapping("/posts/create") @ResponseBody
+    public String CreatePost(
+            @RequestParam(name="title") String title,
+            @RequestParam(name="body") String body
+    ) {
+        User user = userDao.getOne(1L);
+        Post post = new Post(title, body, user);
+        Post dbPost = postDao.save(post);
+        return "redirect:/posts/" + dbPost.getId();
+    }
     @GetMapping("/posts")
     public String GetPosts(Model model) {
         model.addAttribute("posts", postDao.findAll());
@@ -40,9 +50,11 @@ public class PostController {
             @PathVariable long n,
             @RequestParam(name="editTitle") String title,
             @RequestParam(name="editBody") String body) {
-        Post post = new Post(n, title, body);
-        postDao.save(post);
-        return "redirect:/show/"+post.getId();
+        Post dbPost = postDao.getOne(n);
+        dbPost.setTitle(title);
+        dbPost.setBody(body);
+        postDao.save(dbPost);
+        return "redirect:/show/"+dbPost.getId();
     }
 
 //    TODO: create a method to delete a post
