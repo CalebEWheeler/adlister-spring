@@ -31,6 +31,8 @@ public class PostController {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
+    //TODO: WILL NEED TO PASS A LOGGED IN USER ID WHEN WE GET THERE AND HAVE IT
+    // PASSED IN THE POST METHOD TO CONNECT THE "POST" TO THE LOGGED IN "USER"
     @PostMapping("/posts/create")
     public String CreatePost(
             @ModelAttribute Post postToBeSaved) {
@@ -70,7 +72,7 @@ public class PostController {
 
 
     //Delete's a post by it's passed Id
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete/post/{id}")
     public String DeletePost(@PathVariable long id) {
         postDao.deleteById(id);
         return "redirect:/posts";

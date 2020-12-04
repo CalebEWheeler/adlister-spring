@@ -33,6 +33,8 @@ public class AdController {
         model.addAttribute("ad", new Ad());
         return "ads/create";
     }
+    //TODO: WILL NEED TO PASS A LOGGED IN USER ID WHEN WE GET THERE AND HAVE IT
+    // PASSED IN THE POST METHOD TO CONNECT THE "AD" TO THE LOGGED IN "USER"
     @PostMapping("/ads/create")
     public String CreateAd(
             @ModelAttribute Ad adToBeSaved) {
@@ -70,7 +72,7 @@ public class AdController {
 
 
     //Delete's a ad by it's passed Id
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete/ad/{id}")
     public String DeleteAd(@PathVariable long id) {
         adDao.deleteById(id);
         return "redirect:/ads";

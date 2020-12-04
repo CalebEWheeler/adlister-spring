@@ -17,7 +17,7 @@
 <!--        BUTTON ORIGINALLY USED TO EDIT A POST VIA MODAL(deprecated)-->
 <!--        <button id="myModal" data-toggle="modal" data-target="#editModal" class="btn btn-warning mr-2">Edit</button>-->
 
-        <form th:action="@{/delete/{id}(id=${post.id})}" method="post">
+        <form th:action="@{/delete/post/{id}(id=${post.id})}" method="post">
             <button class="btn btn-danger mr-2" type="submit">Delete</button>
         </form>
     </div>
