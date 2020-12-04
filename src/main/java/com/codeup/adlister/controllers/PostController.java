@@ -17,6 +17,12 @@ public class PostController {
         this.postDao = postDao;
         this.userDao = userDao;
     }
+    @GetMapping("/posts")
+    public String GetPosts(Model model) {
+        model.addAttribute("posts", postDao.findAll());
+        return "/posts/index";
+    }
+
     @GetMapping("/posts/create")
     public String showCreateForm(Model model) {
         model.addAttribute("post", new Post());
@@ -24,37 +30,43 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String CreatePost(@ModelAttribute Post postToBeSaved) {
+    public String CreatePost(
+            @ModelAttribute Post postToBeSaved) {
         User user = userDao.getOne(1L);
         postToBeSaved.setUser(user);
         postDao.save(postToBeSaved);
         return "redirect:/posts";
     }
-    @GetMapping("/posts")
-    public String GetPosts(Model model) {
-        model.addAttribute("posts", postDao.findAll());
-        return "/posts/index";
-    }
 
-    @GetMapping("/show/{n}")
-    public String GetPost(@PathVariable String n, Model model) {
-        Long id = Long.parseLong(n);
+
+    @GetMapping("/show/{id}")
+    public String GetPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/show";
     }
-//    TODO: create a method to edit a post
 
-    @PostMapping("/show/{n}")
-    public String UpdatePost(
-            @PathVariable long n,
-            @RequestParam(name="editTitle") String title,
-            @RequestParam(name="editBody") String body) {
-        Post dbPost = postDao.getOne(n);
-        dbPost.setTitle(title);
-        dbPost.setBody(body);
-        postDao.save(dbPost);
-        return "redirect:/show/"+dbPost.getId();
+    @GetMapping("/show/{id}/edit")
+    public String EditPost(@PathVariable long id, Model model) {
+        //will grab passed id from url
+        model.addAttribute("post", postDao.getOne(id));
+        return "/posts/edit";
     }
+
+
+//    TODO: create a method to edit a post
+    @PostMapping("/show/{id}/edit")
+    public String UpdatePost(
+            @PathVariable long id,
+            @ModelAttribute Post postToBeEdited
+            ){
+        User user = postDao.getOne(id).getUser();
+        postToBeEdited.setUser(user);
+        postToBeEdited.setId(id);
+        postDao.save(postToBeEdited);
+        return "redirect:/posts";
+    }
+
+
 
 //    TODO: create a method to delete a post
     @PostMapping("/delete/{id}")
