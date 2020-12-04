@@ -54,7 +54,6 @@ public class PostController {
     //Post edit get and post requests
     @GetMapping("/posts/{id}/edit")
     public String EditPost(@PathVariable long id, Model model) {
-        //will grab passed id from url
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/edit";
     }
@@ -78,4 +77,3 @@ public class PostController {
         return "redirect:/posts";
     }
 }
-

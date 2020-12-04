@@ -6,10 +6,7 @@ import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdController {
@@ -27,6 +24,7 @@ public class AdController {
         return "ads/index";
     }
 
+
     //Ad creation get and post requests
     @GetMapping("/ads/create")
     public String showCreateForm(Model model) {
@@ -43,6 +41,7 @@ public class AdController {
         adDao.save(adToBeSaved);
         return "redirect:/ads";
     }
+
 
     //Show's a single ad's content
     @GetMapping("/ads/{id}")
@@ -77,7 +76,4 @@ public class AdController {
         adDao.deleteById(id);
         return "redirect:/ads";
     }
-
-
-
 }
