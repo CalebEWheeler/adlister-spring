@@ -44,7 +44,7 @@ public class PostController {
 
 
     //Show's a single post's content
-    @GetMapping("/show/{id}")
+    @GetMapping("/posts/{id}")
     public String GetPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/show";
@@ -52,13 +52,13 @@ public class PostController {
 
 
     //Post edit get and post requests
-    @GetMapping("/show/{id}/edit")
+    @GetMapping("/posts/{id}/edit")
     public String EditPost(@PathVariable long id, Model model) {
         //will grab passed id from url
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/edit";
     }
-    @PostMapping("/show/{id}/edit")
+    @PostMapping("/posts/{id}/edit")
     public String UpdatePost(
             @PathVariable long id,
             @ModelAttribute Post postToBeEdited

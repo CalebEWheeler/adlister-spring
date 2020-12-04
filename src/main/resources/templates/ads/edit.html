@@ -6,7 +6,7 @@
 </head>
 <body>
 <main>
-    <form th:action="@{/show/{id}/edit(id=${ad.id})}" th:method="post" th:object="${ad}">
+    <form th:action="@{/ads/{id}/edit(id=${ad.id})}" th:method="post" th:object="${ad}">
         Title:
         <input th:field="*{title}">
         <br/>
