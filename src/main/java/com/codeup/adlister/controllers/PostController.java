@@ -17,19 +17,18 @@ public class PostController {
         this.postDao = postDao;
         this.userDao = userDao;
     }
-        @GetMapping("/posts/create") @ResponseBody
-    public String ShowCreateForm() {
-        return "posts/new";
+    @GetMapping("/posts/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
     }
-    @PostMapping("/posts/create") @ResponseBody
-    public String CreatePost(
-            @RequestParam(name="title") String title,
-            @RequestParam(name="body") String body
-    ) {
+
+    @PostMapping("/posts/create")
+    public String CreatePost(@ModelAttribute Post postToBeSaved) {
         User user = userDao.getOne(1L);
-        Post post = new Post(title, body, user);
-        Post dbPost = postDao.save(post);
-        return "redirect:/posts/" + dbPost.getId();
+        postToBeSaved.setUser(user);
+        postDao.save(postToBeSaved);
+        return "redirect:/posts";
     }
     @GetMapping("/posts")
     public String GetPosts(Model model) {
