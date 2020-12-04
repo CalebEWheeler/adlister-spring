@@ -17,18 +17,20 @@ public class PostController {
         this.postDao = postDao;
         this.userDao = userDao;
     }
+    //Show's all posts
     @GetMapping("/posts")
     public String GetPosts(Model model) {
         model.addAttribute("posts", postDao.findAll());
         return "/posts/index";
     }
 
+
+    //Post creation get and post requests
     @GetMapping("/posts/create")
     public String showCreateForm(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
-
     @PostMapping("/posts/create")
     public String CreatePost(
             @ModelAttribute Post postToBeSaved) {
@@ -39,21 +41,21 @@ public class PostController {
     }
 
 
+    //Show's a single post's content
     @GetMapping("/show/{id}")
     public String GetPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/show";
     }
 
+
+    //Post edit get and post requests
     @GetMapping("/show/{id}/edit")
     public String EditPost(@PathVariable long id, Model model) {
         //will grab passed id from url
         model.addAttribute("post", postDao.getOne(id));
         return "/posts/edit";
     }
-
-
-//    TODO: create a method to edit a post
     @PostMapping("/show/{id}/edit")
     public String UpdatePost(
             @PathVariable long id,
@@ -67,8 +69,7 @@ public class PostController {
     }
 
 
-
-//    TODO: create a method to delete a post
+    //Delete's a post by it's passed Id
     @PostMapping("/delete/{id}")
     public String DeletePost(@PathVariable long id) {
         postDao.deleteById(id);

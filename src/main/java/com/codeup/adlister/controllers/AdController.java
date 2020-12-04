@@ -1,21 +1,81 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.Repository.AdRepository;
+import com.codeup.adlister.Repository.UserRepository;
+import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AdController {
     private final AdRepository adDao;
+    private final UserRepository userDao;
 
-    public AdController(AdRepository adDao) {
+    public AdController(AdRepository adDao, UserRepository userDao) {
         this.adDao = adDao;
+        this.userDao = userDao;
     }
-
+    //Shows all ads
     @GetMapping("/ads")
-    public String index(Model model) {
+    public String GetAds(Model model) {
         model.addAttribute("ads", adDao.findAll());
         return "ads/index";
     }
+
+    //Ad creation get and post requests
+    @GetMapping("/ads/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("ad", new Ad());
+        return "ads/create";
+    }
+    @PostMapping("/ads/create")
+    public String CreateAd(
+            @ModelAttribute Ad adToBeSaved) {
+        User user = userDao.getOne(1L);
+        adToBeSaved.setUser(user);
+        adDao.save(adToBeSaved);
+        return "redirect:/ads";
+    }
+
+    //Show's a single ad's content
+    @GetMapping("/ads/{id}")
+    public String GetAd(@PathVariable long id, Model model) {
+        model.addAttribute("ad", adDao.getOne(id));
+        return "/ads/show";
+    }
+
+
+    //Ad edit get and post requests
+    @GetMapping("/ads/{id}/edit")
+    public String EditAd(@PathVariable long id, Model model) {
+        model.addAttribute("ad", adDao.getOne(id));
+        return "/ads/edit";
+    }
+    @PostMapping("/ads/{id}/edit")
+    public String UpdateAd(
+            @PathVariable long id,
+            @ModelAttribute Ad adToBeEdited
+    ){
+        User user = adDao.getOne(id).getUser();
+        adToBeEdited.setUser(user);
+        adToBeEdited.setId(id);
+        adDao.save(adToBeEdited);
+        return "redirect:/ads";
+    }
+
+
+    //Delete's a ad by it's passed Id
+    @PostMapping("/delete/{id}")
+    public String DeleteAd(@PathVariable long id) {
+        adDao.deleteById(id);
+        return "redirect:/ads";
+    }
+
+
+
 }
