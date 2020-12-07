@@ -11,11 +11,20 @@
             <a class="nav-link text-light" th:href="@{/}">Codeup Blog</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light" th:href="@{/posts}">Posts</a>
+            <a class="nav-link text-light" th:href="@{/ads}">Ads</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-light" th:href="@{/posts/create}">Create Posts</a>
+            <a class="nav-link text-light" th:href="@{/posts}">Posts</a>
         </li>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Create
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" th:href="@{/ads/create}">Ad</a>
+                <a class="dropdown-item" th:href="@{/posts/create}">Post</a>
+            </div>
+        </div>
         <li class="nav-item ml-auto">
             <a class="nav-link text-light" th:href="@{/sign-up}">Register</a>
         </li>
@@ -26,6 +35,9 @@
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
             </form>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" th:href="@{/profile}">Profile</a>
         </li>
     </ul>
 </nav>

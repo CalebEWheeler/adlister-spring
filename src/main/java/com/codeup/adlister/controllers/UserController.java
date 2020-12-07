@@ -32,4 +32,5 @@ public class UserController {
         usersDao.save(user);
         return "redirect:/login";
     }
+
 }
