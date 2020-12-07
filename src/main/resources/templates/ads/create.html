@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/head :: head('Create AD')">
     <meta charset="UTF-8">
-    <title>Ads</title>
 </head>
 <body>
-<main>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Welcome to the Codeup Blog/Adlister!')"></header>
+<main class="container">
     <form th:action="@{/ads/create}" th:method="post" th:object="${ad}">
         Title:
         <input th:field="*{title}"/>
@@ -16,5 +17,7 @@
         <input type="submit"/>
     </form>
 </main>
+<footer th:replace="partials/partials :: footer"></footer>
+<th:block th:include="partials/scripts :: scripts"></th:block>
 </body>
 </html>

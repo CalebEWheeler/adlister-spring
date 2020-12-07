@@ -4,6 +4,7 @@ import com.codeup.adlister.Repository.AdRepository;
 import com.codeup.adlister.Repository.UserRepository;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,8 @@ public class AdController {
     @PostMapping("/ads/create")
     public String CreateAd(
             @ModelAttribute Ad dbAd) {
-        User user = userDao.getOne(1L);
-        dbAd.setUser(user);
+        User userDb = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        dbAd.setUser(userDb);
         adDao.save(dbAd);
         return "redirect:/ads";
     }
