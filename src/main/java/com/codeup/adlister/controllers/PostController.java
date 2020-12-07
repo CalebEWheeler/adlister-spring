@@ -4,6 +4,7 @@ import com.codeup.adlister.Repository.PostRepository;
 import com.codeup.adlister.Repository.UserRepository;
 import com.codeup.adlister.models.Post;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
+    public final EmailService emailSender;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailSender) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailSender = emailSender;
     }
     //Show's all posts
     @GetMapping("/posts")
@@ -35,10 +38,11 @@ public class PostController {
     // PASSED IN THE POST METHOD TO CONNECT THE "POST" TO THE LOGGED IN "USER"
     @PostMapping("/posts/create")
     public String CreatePost(
-            @ModelAttribute Post postToBeSaved) {
+            @ModelAttribute Post dbPost) {
         User user = userDao.getOne(1L);
-        postToBeSaved.setUser(user);
-        postDao.save(postToBeSaved);
+        dbPost.setUser(user);
+        postDao.save(dbPost);
+        emailSender.prepareAndSend(dbPost, "Post has been created", "You can find it with the id of " + dbPost.getId());
         return "redirect:/posts";
     }
 

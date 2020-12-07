@@ -13,6 +13,7 @@ public class AdController {
     private final AdRepository adDao;
     private final UserRepository userDao;
 
+
     public AdController(AdRepository adDao, UserRepository userDao) {
         this.adDao = adDao;
         this.userDao = userDao;
@@ -35,10 +36,10 @@ public class AdController {
     // PASSED IN THE POST METHOD TO CONNECT THE "AD" TO THE LOGGED IN "USER"
     @PostMapping("/ads/create")
     public String CreateAd(
-            @ModelAttribute Ad adToBeSaved) {
+            @ModelAttribute Ad dbAd) {
         User user = userDao.getOne(1L);
-        adToBeSaved.setUser(user);
-        adDao.save(adToBeSaved);
+        dbAd.setUser(user);
+        adDao.save(dbAd);
         return "redirect:/ads";
     }
 
