@@ -13,7 +13,7 @@ public class HelloController {
     @GetMapping("/hello/{name}")
     public String sayHello(@PathVariable String name, Model model) {
         model.addAttribute("name", name);
-        return "/hello";
+        return "hello";
     }
 
     @GetMapping("/create-a-hello")
@@ -52,7 +52,7 @@ public class HelloController {
         cohortNames.add("Bash");
 
         model.addAttribute("cohortNames", cohortNames);
-        return "/join";
+        return "join";
     }
 
     @PostMapping("/join")

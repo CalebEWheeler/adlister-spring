@@ -49,7 +49,7 @@ public class AdController {
     @GetMapping("/ads/{id}")
     public String GetAd(@PathVariable long id, Model model) {
         model.addAttribute("ad", adDao.getOne(id));
-        return "/ads/show";
+        return "ads/show";
     }
 
 
@@ -57,7 +57,7 @@ public class AdController {
     @GetMapping("/ads/{id}/edit")
     public String EditAd(@PathVariable long id, Model model) {
         model.addAttribute("ad", adDao.getOne(id));
-        return "/ads/edit";
+        return "ads/edit";
     }
     @PostMapping("/ads/{id}/edit")
     public String UpdateAd(
