@@ -41,11 +41,12 @@ public class Post {
     }
 
     public long getId() {return id;}
-    public void setId(long id) {this.id = id;}
     public String getTitle() {return title;}
-    public void setTitle(String title) {this.title = title;}
     public String getBody() {return body;}
-    public void setBody(String body) {this.body = body;}
     public User getUser() {return user;}
+
+    public void setId(long id) {this.id = id;}
+    public void setTitle(String title) {this.title = title;}
+    public void setBody(String body) {this.body = body;}
     public void setUser(User user) {this.user=user;}
 }

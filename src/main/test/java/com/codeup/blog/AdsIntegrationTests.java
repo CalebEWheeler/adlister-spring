@@ -48,13 +48,14 @@ public class AdsIntegrationTests {
 
     @Before
     public void setup() throws Exception {
+        String testUsername = "testUser";
 
-        testUser = userDao.findByUsername("testUser");
+        testUser = userDao.findByUsername(testUsername);
 
         // Creates the test user if not exists
         if (testUser == null) {
             User newUser = new User();
-            newUser.setUsername("testUser");
+            newUser.setUsername(testUsername);
             newUser.setPassword(passwordEncoder.encode("pass"));
             newUser.setEmail("testUser@codeup.com");
             testUser = userDao.save(newUser);
@@ -62,7 +63,7 @@ public class AdsIntegrationTests {
 
         // Throws a Post request to /login and expect a redirection to the Ads index page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
-                .param("username", "testUser")
+                .param("username", testUsername)
                 .param("password", "pass"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
                 .andExpect(redirectedUrl("/ads"))
